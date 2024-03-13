@@ -13,6 +13,8 @@
 Just pull this repo to your favorite java IDE. Run `pom.xml` if IDE won't launch it automatically. `pom.xml` will 
 download all necessary dependencies to the project thanks to maven.
 
+All the cells are colored according to their age. The more older the cell is, the more blue the cell looks like.
+
 **App controlling**
 - After app launching an empty map of hexagons is displayed
 - user can config the map by themselves by clicking on the hexagon cell. If cell is dead (cell is white), it will be colored to the black color (cell will revive).
