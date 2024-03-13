@@ -8,6 +8,11 @@
 - Color the cell based on its age (1 pt.)
 - Make Hexagonal automaton (game of life with cells of hexagon shape) (2 pts.)
 
+**RULES**
+- Each cell with one or no neighbour dies from isolation
+- Each cell with three or more neighbours dies from overpopulation
+- Only the cells with 2 neighbours survives
+- Each cell with two neighbour revives
 
 **Launching**
 Just pull this repo to your favorite java IDE. Run `pom.xml` if IDE won't launch it automatically. `pom.xml` will 
@@ -34,3 +39,7 @@ All the cells are colored according to their age. The more older the cell is, th
 Hexagon map generation implementation was hugely inspired by this link:
 
 ```https://www.redblobgames.com/grids/hexagons/```
+
+Rules of hexagonal game of life were taken from:
+
+```https://arunarjunakani.github.io/HexagonalGameOfLife/```
