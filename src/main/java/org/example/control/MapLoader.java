@@ -1,4 +1,7 @@
-package org.example;
+package org.example.control;
+
+import org.example.model.Cell;
+import org.example.model.HexagonalMap;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,23 +14,20 @@ public class MapLoader {
         configFileToLoad = fileWithSerializedMap;
     }
 
-    public HexagonalMap loadMap() throws ParsingException {
+    public void loadMapContent(HexagonalMap map) throws ParsingException {
         try {
             List<String> lines = Files.readAllLines(configFileToLoad);
 
             int cols = lines.get(0).length();
             int rows = lines.size() - 1; // neglecting the last empty line
 
-            HexagonalMap loadedMap = new HexagonalMap(rows, cols);
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    char currentCell = lines.get(i).charAt(j);
-                    Cell loadedCell = new Cell(j, i, currentCell == '1');
-                    loadedMap.setCell(loadedCell, i, j);
+                    char currentCellAliveIndicator = lines.get(i).charAt(j);
+                    Cell currentCell = map.getCell(i,j);
+                    currentCell.setAlive(currentCellAliveIndicator == '1');
                 }
             }
-
-            return loadedMap;
         } catch (Exception e) {
             throw new ParsingException("Selected file " + configFileToLoad + " does not contain configuration of map",
                     e);

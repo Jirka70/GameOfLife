@@ -1,4 +1,4 @@
-package org.example;
+package org.example.launch;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -6,6 +6,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.example.model.HexagonalMap;
+import org.example.components.TopMenu;
+import org.example.control.GameOfLifeManager;
+import org.example.control.HexagonMapDrawer;
 
 
 public class GameOfLifeApp extends Application {
@@ -31,12 +35,12 @@ public class GameOfLifeApp extends Application {
         HexagonMapDrawer drawer = new HexagonMapDrawer(hexagonalMap, HEXAGON_SIZE);
         drawer.displayMap(rootPane);
 
-        TopMenu topMenu = new TopMenu(drawer);
+        TopMenu topMenu = new TopMenu(hexagonalMap, drawer);
         rootPane.getChildren().add(topMenu.getTopMenu());
 
         rootPane.setOnMouseClicked(drawer::changeCellColorWithClick);
 
-        GameOfLifeManager gameOfLifeManager = new GameOfLifeManager(drawer);
+        GameOfLifeManager gameOfLifeManager = new GameOfLifeManager(hexagonalMap, drawer);
         scene.setOnKeyPressed(keyEvent -> processKeyPress(gameOfLifeManager, keyEvent));
     }
 

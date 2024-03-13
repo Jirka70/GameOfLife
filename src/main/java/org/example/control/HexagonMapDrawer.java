@@ -1,16 +1,20 @@
-package org.example;
+package org.example.control;
 
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import org.example.model.Cell;
+import org.example.model.HexagonalMap;
+import org.example.util.CellColorComputer;
+import org.example.util.Position;
 
 public class HexagonMapDrawer {
     private static final int NUMBER_OF_SIDES = 6;
     private static final int ANGLE = 60;
     private final Polygon[][] hexagonPlate;
-    private HexagonalMap hexagonalMap;
+    private final HexagonalMap hexagonalMap;
     private final double hexagonSize;
     private final double verticalSpacing;
     private final double horizontalSpacing;
@@ -22,25 +26,6 @@ public class HexagonMapDrawer {
 
         verticalSpacing = Math.sqrt(3) * hexagonSize;
         horizontalSpacing = 3 / 2.0 * hexagonSize;
-    }
-
-    public void setHexagonalMap(HexagonalMap newHexagonalMap) {
-        hexagonalMap = newHexagonalMap;
-        configHexagons();
-    }
-
-    public HexagonalMap getHexagonalMap() {
-        return hexagonalMap;
-    }
-
-    private void configHexagons() {
-        int rows = hexagonalMap.getRows();
-        int cols = hexagonalMap.getCols();
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-               changeColor(hexagonalMap.getCell(i,j));
-            }
-        }
     }
 
     public void displayMap(Pane rootPane) {

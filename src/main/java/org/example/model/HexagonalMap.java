@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 public class HexagonalMap {
     private static final int[][][] NEIGHBOUR_MAP = new int[][][]{{{1, 1}, {1, 0}, {0, -1},

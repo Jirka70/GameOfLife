@@ -1,8 +1,10 @@
-package org.example;
+package org.example.control;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import org.example.model.Cell;
+import org.example.model.HexagonalMap;
 
 public class GameOfLifeManager {
     private static final double FRAME_DURATION_IN_SECONDS = 0.1;
@@ -10,15 +12,14 @@ public class GameOfLifeManager {
     private final Timeline timeline;
     private final HexagonMapDrawer hexagonMapDrawer;
     private AnimationState actualState = AnimationState.PAUSED;
-    public GameOfLifeManager(HexagonMapDrawer hexagonMapDrawer) {
+    public GameOfLifeManager(HexagonalMap hexagonalMap, HexagonMapDrawer drawer) {
         timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DURATION_IN_SECONDS),
-            event -> processFrame(hexagonMapDrawer)));
+            event -> processFrame(hexagonalMap)));
         timeline.setCycleCount(Timeline.INDEFINITE);
-        this.hexagonMapDrawer = hexagonMapDrawer;
+        this.hexagonMapDrawer = drawer;
     }
 
-    private void processFrame(HexagonMapDrawer drawer) {
-        HexagonalMap hexagonalMap = drawer.getHexagonalMap();
+    private void processFrame(HexagonalMap hexagonalMap) {
         if (actualState == AnimationState.NEXT_STEP_MODE) {
             generateNextStep(hexagonalMap);
             pause();

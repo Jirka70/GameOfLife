@@ -1,4 +1,7 @@
-package org.example;
+package org.example.control;
+
+import org.example.model.Cell;
+import org.example.model.HexagonalMap;
 
 import java.io.*;
 import java.nio.file.Path;
