@@ -19,7 +19,7 @@ download all necessary dependencies to the project thanks to maven.
   If cell is alive (black or another color than white), cell will be colored to white (cell will be killed)
 - on the topleft of the app layout, there is situated one button, which on mouse click or on mouse hover will expand and show `Save configuration` and `Load configuration`
 - `Save configuration` button will show you a dialog, which requests you to type a file name, where the configuration will be stored
-- `Load configuation` button will show dialog of your filesystem with initial directory id `database/` folder, where all the saved configurations are saved
+- `Load configuation` button will show dialog of your filesystem with initial directory id `database/` folder, where all the saved configurations are saved and just choose the file you want to load
 
 **Game Of Life process control**
 - Process of the game can be paused, resumed or each its iteration can be traversed step-by-step as debugger
