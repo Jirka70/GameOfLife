@@ -49,7 +49,7 @@ public class GameOfLifeApp extends Application {
             gameOfLifeManager.play();
         } else if (keyEvent.getCode() == KeyCode.SPACE) {
             gameOfLifeManager.pause();
-        } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+        } else if (keyEvent.getCode() == KeyCode.UP) {
             if (gameOfLifeManager.isProcessPaused()) {
                 gameOfLifeManager.nextStep();
             }

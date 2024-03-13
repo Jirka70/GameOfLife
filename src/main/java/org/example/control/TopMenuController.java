@@ -37,11 +37,13 @@ public class TopMenuController {
     public void loadConfig(MenuBar menuBar, HexagonalMap hexagonalMap, HexagonMapDrawer drawer) {
         Window homeWindow = menuBar.getScene().getWindow();
         FileChooser chooser = new FileChooser();
-        chooser.setInitialDirectory(Paths.get("/Users/jirka/Jirka/KPG/GameOfLife/database").toFile());
+        chooser.setInitialDirectory(Paths.get("database").toFile());
         File selectedFile = chooser.showOpenDialog(homeWindow);
+
         if (selectedFile == null) {
             return;
         }
+
         MapLoader loader = new MapLoader(selectedFile.toPath());
         try {
             loader.loadMapContent(hexagonalMap);

@@ -10,13 +10,12 @@ public class TopMenu {
 
     public TopMenu(HexagonalMap hexagonalMap, HexagonMapDrawer drawer) {
         TopMenuController controller = new TopMenuController();
-
         MenuItem loadConfiguration = new Menu("Load configuration");
         loadConfiguration.setOnAction(e -> controller.loadConfig(menuBar, hexagonalMap, drawer));
-        Menu saveConfiguration = new Menu("Save configuration");
+        MenuItem saveConfiguration = new Menu("Save configuration");
         saveConfiguration.setOnAction(e -> controller.saveConfig(hexagonalMap));
         Menu fileMenu = new Menu("File");
-        
+
         fileMenu.getItems().addAll(saveConfiguration, loadConfiguration);
         menuBar.getMenus().add(fileMenu);
     }

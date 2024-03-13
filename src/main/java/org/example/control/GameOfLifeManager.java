@@ -33,10 +33,13 @@ public class GameOfLifeManager {
 
         HexagonalMap tempMap = new HexagonalMap(rows, cols);
         copyDeeplyMapToTempMap(hexagonalMap, tempMap);
-
+        boolean areAllCellsDead = true;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 Cell currentCell = tempMap.getCell(i,j);
+                if (currentCell.isAlive()) {
+                    areAllCellsDead = false;
+                }
                 int numberOfAliveAdjacentCells = hexagonalMap.computeNumberOfAliveAdjacentCells(i,j);
                 applyConwayRules(currentCell, numberOfAliveAdjacentCells);
             }
@@ -49,6 +52,10 @@ public class GameOfLifeManager {
                 cellFromOriginalMap.setAlive(currentCell.isAlive());
                 hexagonMapDrawer.changeColor(cellFromOriginalMap);
             }
+        }
+
+        if (areAllCellsDead) {
+            pause();
         }
     }
 
