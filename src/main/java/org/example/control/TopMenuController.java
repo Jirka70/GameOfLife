@@ -27,6 +27,8 @@ public class TopMenuController {
 
         try {
             serializer.serializeMap(fileToSave);
+            AlertFactory.showAlert(Alert.AlertType.INFORMATION, "Success", "file " + typedFileName
+                    + " was saved successfully","");
         } catch (IOException e) {
             AlertFactory.showAlert(Alert.AlertType.ERROR,
                     "Cannot solve file",
@@ -48,6 +50,8 @@ public class TopMenuController {
         try {
             loader.loadMapContent(hexagonalMap);
             changeColorOfAllCells(drawer, hexagonalMap);
+            AlertFactory.showAlert(Alert.AlertType.INFORMATION, "Success", "file " + selectedFile
+                    + " was loaded successfully","");
         } catch (MapLoader.ParsingException e) {
             AlertFactory.showAlert(Alert.AlertType.ERROR, "Invalid selected file",
                     "Selected file cannot be solved",
