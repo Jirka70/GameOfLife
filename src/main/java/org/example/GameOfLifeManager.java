@@ -9,13 +9,23 @@ public class GameOfLifeManager {
 
     private final Timeline timeline;
     private final HexagonMapDrawer hexagonMapDrawer;
-    public GameOfLifeManager(HexagonalMap hexagonalMap, HexagonMapDrawer hexagonMapDrawer) {
+    private AnimationState actualState = AnimationState.PAUSED;
+    public GameOfLifeManager(HexagonMapDrawer hexagonMapDrawer) {
         timeline = new Timeline(new KeyFrame(Duration.seconds(FRAME_DURATION_IN_SECONDS),
-                event -> generateNextStep(hexagonalMap)));
+            event -> processFrame(hexagonMapDrawer)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         this.hexagonMapDrawer = hexagonMapDrawer;
     }
 
+    private void processFrame(HexagonMapDrawer drawer) {
+        HexagonalMap hexagonalMap = drawer.getHexagonalMap();
+        if (actualState == AnimationState.NEXT_STEP_MODE) {
+            generateNextStep(hexagonalMap);
+            pause();
+        } else if (actualState == AnimationState.RUNNING) {
+            generateNextStep(hexagonalMap);
+        }
+    }
     private void generateNextStep(HexagonalMap hexagonalMap) {
         int rows = hexagonalMap.getRows();
         int cols = hexagonalMap.getCols();
@@ -42,14 +52,10 @@ public class GameOfLifeManager {
     }
 
     private void applyConwayRules(Cell cell, int numberOfAliveAdjacentCells) {
-        if (numberOfAliveAdjacentCells == 2) {
-            return;
-        }
-
         if (numberOfAliveAdjacentCells < 2) {
             cell.setAlive(false);
         } else {
-            cell.setAlive(numberOfAliveAdjacentCells == 3);
+            cell.setAlive(numberOfAliveAdjacentCells == 2);
         }
     }
 
@@ -65,16 +71,26 @@ public class GameOfLifeManager {
         }
     }
 
-    public void start() {
-        //generateNextStep(hexagonalMap);
+    public void play() {
+        actualState = AnimationState.RUNNING;
         timeline.play();
     }
 
     public void pause() {
+        actualState = AnimationState.PAUSED;
         timeline.pause();
     }
 
-    public void resume() {
+    public void nextStep() {
+        actualState = AnimationState.NEXT_STEP_MODE;
         timeline.play();
+    }
+
+    public boolean isProcessPaused() {
+        return actualState == AnimationState.PAUSED;
+    }
+
+    private enum AnimationState {
+        PAUSED, RUNNING, NEXT_STEP_MODE
     }
 }

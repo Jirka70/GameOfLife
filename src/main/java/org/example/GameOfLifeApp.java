@@ -12,7 +12,7 @@ public class GameOfLifeApp extends Application {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
     /**
-     * Something like "radius" of hexagon. Indicates the half of the width of hexagon basically
+     * Something like "radius" of hexagon. Indicates the half of the hexagon width basically
      */
     private static final int HEXAGON_SIZE = 10;
     private final Pane rootPane = new Pane();
@@ -31,18 +31,24 @@ public class GameOfLifeApp extends Application {
         HexagonMapDrawer drawer = new HexagonMapDrawer(hexagonalMap, HEXAGON_SIZE);
         drawer.displayMap(rootPane);
 
+        TopMenu topMenu = new TopMenu(drawer);
+        rootPane.getChildren().add(topMenu.getTopMenu());
+
         rootPane.setOnMouseClicked(drawer::changeCellColorWithClick);
 
-        GameOfLifeManager gameOfLifeManager = new GameOfLifeManager(hexagonalMap, drawer);
+        GameOfLifeManager gameOfLifeManager = new GameOfLifeManager(drawer);
         scene.setOnKeyPressed(keyEvent -> processKeyPress(gameOfLifeManager, keyEvent));
-
     }
 
     private void processKeyPress(GameOfLifeManager gameOfLifeManager, KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            gameOfLifeManager.start();
+            gameOfLifeManager.play();
         } else if (keyEvent.getCode() == KeyCode.SPACE) {
             gameOfLifeManager.pause();
+        } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+            if (gameOfLifeManager.isProcessPaused()) {
+                gameOfLifeManager.nextStep();
+            }
         }
     }
 }

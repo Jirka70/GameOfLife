@@ -21,16 +21,18 @@ public class Cell {
     public void setAlive(boolean alive) {
         if (!alive) {
             age = 0;
+        } else {
+            if (!isAlive) {
+                age = 0;
+            } else {
+                age++;
+            }
         }
         isAlive = alive;
     }
 
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public int getX() {
