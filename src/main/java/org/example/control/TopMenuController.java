@@ -18,11 +18,11 @@ import java.util.Optional;
 public class TopMenuController {
     public void saveConfig(HexagonalMap hexagonalMap) {
         String typedFileName = getFileToSave(); // displays text field dialog
-        if (typedFileName == null) {
+        if (typedFileName == null || typedFileName.isEmpty()) {
             return;
         }
 
-        Path fileToSave = Paths.get("database").resolve(Paths.get(getFileToSave()));
+        Path fileToSave = Paths.get("database").resolve(Paths.get(typedFileName));
         HexagonMapSerializer serializer = new HexagonMapSerializer(hexagonalMap);
 
         try {
